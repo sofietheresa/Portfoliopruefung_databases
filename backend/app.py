@@ -1,7 +1,7 @@
 import flask
 from flask_cors import CORS
 import json
-from flask import jsonify, request
+from flask import jsonify, request, redirect
 import psycopg2 
 import os
 
@@ -21,35 +21,34 @@ try:
     cur = con.cursor()
 
 
-     # GET: Fetch all books from the database
+   #  GET: Fetch all employees from the database
     @app.route('/')
-    def fetch_all_books():
-        cur.execute('SELECT * FROM books')
+    def fetch_all_employees():
+        cur.execute('SELECT * FROM employees')
         rows = cur.fetchall()
         print(rows)
-
         return jsonify(rows)
+
 
     # GET: Fetch book by bookId from database
-    @app.route('/<int:book_id>')
-    def fetch_by_id(book_id=None):
-        cur.execute(f'SELECT * FROM books WHERE book_id = {book_id}')
+    @app.route('/<int:id>')
+    def fetch_by_id(employee_id=None):
+        cur.execute(f'SELECT * FROM employees WHERE id = {id}')
         rows = cur.fetchall()
         print(rows)
-
         return jsonify(rows)
 
-    # POST: Create books and add them to the database
-    @app.route('/add-book', methods=['GET', 'POST'])
-    def add_movie():
+    # POST: Insert employees and add them to the db
+    @app.route('/add-employee', methods=['GET', 'POST'])
+    def add_employee():
         if request.method == 'POST':
             data = request.form.to_dict()
             print(data)
-            cur.execute("INSERT INTO book (book_name, release_year, summary, director, genre, rating, movie_runtime, meta_score) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                        (f"{data['bookName']}",  data['releaseYear'], f"{data['summary']}",
-                         f"{data['director']}", f"{data['genre']}", f"{data['rating']}", data['movieRuntime'], data['metaScore']))
+            cur.execute("INSERT INTO employees (id, f_name, l_name, location_id) VALUES (%s, %s, %s, %s)",
+                        (data['ID'],  data['employeeFName'], data['employeeLName'], data['location']))
             con.commit()
             return 'Form submitted'
+            return redirect('http://localhost:3000', code="200")
         else:
             return 'Form submission failed'
 
