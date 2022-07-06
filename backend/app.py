@@ -61,15 +61,16 @@ try:
         con.commit()
         return redirect('http://localhost:3000', code="200")
 
-    # PUT: Update book by bookId from the database
-    @app.route('/update-book', methods=['GET', 'PUT'])
+    # PUT: Update employee by employeeId from the database
+    @app.route('/update-employee', methods=['GET','POST'])
     def update_by_id():
-
+        newdata = request.form.to_dict()
         cur.execute(
-            'UPDATE books SET book_name = \'Goldeneye\' WHERE book_id = 1')
+            'UPDATE employees SET f_name = %s, l_name = %s, location_id = %s WHERE id = %s;'
+          % ( newdata['employeeFName'], newdata['employeeLName'], newdata['location'], newdata['ID']))
         con.commit()
 
-        return 'Movie Updated'
+        return 'Employee Updated'
 
 except:
     print('Error')
