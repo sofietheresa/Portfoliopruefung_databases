@@ -47,21 +47,19 @@ try:
             cur.execute("INSERT INTO employees (id, f_name, l_name, location_id) VALUES (%s, %s, %s, %s)",
                         (data['ID'],  data['employeeFName'], data['employeeLName'], data['location']))
             con.commit()
-            return 'Form submitted'
             return redirect('http://localhost:3000', code="200")
         else:
             return 'Form submission failed'
 
-    # DELETE: Delete books by bookId from the database
-    @app.route('/delete-book', methods=['GET', 'DELETE'])
+    # DELETE: Delete employees by employeeId from the database
+    @app.route('/delete-employee', methods=['GET','POST'])
     def delete_by_id():
-        book_id = request.form.to_dict()
-        print(book_id['bookId'])
+        employee = request.form.to_dict()
+        print(employee['ID'])
         cur.execute(
-            f"DELETE FROM book WHERE book_id = {book_id['bookId']} RETURNING book_name")
+            "DELETE FROM employees WHERE id = %s" % (employee['ID']))
         con.commit()
-
-        return 'Book Deleted'
+        return redirect('http://localhost:3000', code="200")
 
     # PUT: Update book by bookId from the database
     @app.route('/update-book', methods=['GET', 'PUT'])
