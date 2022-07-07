@@ -65,12 +65,13 @@ try:
     @app.route('/update-employee', methods=['GET','POST'])
     def update_by_id():
         newdata = request.form.to_dict()
-        cur.execute(
-            'UPDATE employees SET f_name = %s, l_name = %s, location_id = %s WHERE id = %s;'
-          % ( newdata['employeeFName'], newdata['employeeLName'], newdata['location'], newdata['ID']))
+        sql = """UPDATE employees SET f_name = %s, l_name = %s, location_id = %s WHERE id = %s;"""
+        cur.execute(sql,(newdata["employeeFName"], newdata['employeeLName'], newdata['location'], newdata['ID']))
+        #     'UPDATE employees SET f_name = "%s", l_name = %s, location_id = %s WHERE id = %s;'
+        #   %(newdata["employeeFName"], newdata['employeeLName'], newdata['location'], newdata['ID']))
         con.commit()
 
-        return 'Employee Updated'
+        return redirect('http://localhost:3000', code="200")
 
 except:
     print('Error')
