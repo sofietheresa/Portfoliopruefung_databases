@@ -19,7 +19,6 @@ try:
     con = psycopg2.connect(**dbconn)
     cur = con.cursor()
 
-
    # READ: Fetch all employees from the database
     @app.route('/')
     def fetch_all_employees():
