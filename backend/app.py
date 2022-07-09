@@ -31,8 +31,8 @@ try:
     def add_employee():
         if request.method == 'POST':
             data = request.form.to_dict()
-            cur.execute("INSERT INTO employees (employees_id, f_name, l_name, locations) VALUES (%s, %s, %s, %s)",
-                        (data['ID'],  data['employeeFName'], data['employeeLName'], data['location']))
+            cur.execute("INSERT INTO employees ( f_name, l_name, locations) VALUES (%s, %s, %s)",
+                        (data['employeeFName'], data['employeeLName'], data['location']))
             con.commit()
             return redirect('http://localhost:3000')
         else:

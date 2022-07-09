@@ -45,10 +45,6 @@ const App = () => {
             <input type="number" name="location" required />
           </div>
           <div>
-            <label>ID</label>
-            <input type="number" name="ID" required />
-          </div>
-          <div>
             <button type="submit">Add Employee</button>
           </div>
         </form>
