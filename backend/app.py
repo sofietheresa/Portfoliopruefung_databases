@@ -31,7 +31,7 @@ try:
     def add_employee():
         if request.method == 'POST':
             data = request.form.to_dict()
-            cur.execute("INSERT INTO employees (id, f_name, l_name, location_id) VALUES (%s, %s, %s, %s)",
+            cur.execute("INSERT INTO employees (employees_id, f_name, l_name, locations) VALUES (%s, %s, %s, %s)",
                         (data['ID'],  data['employeeFName'], data['employeeLName'], data['location']))
             con.commit()
             return redirect('http://localhost:3000')
@@ -43,7 +43,7 @@ try:
     def delete_by_id():
         employee = request.form.to_dict()
         cur.execute(
-            "DELETE FROM employees WHERE id = %s" % (employee['ID']))
+            "DELETE FROM employees WHERE employees_id = %s" % (employee['ID']))
         con.commit()
         return redirect('http://localhost:3000')
 
@@ -51,7 +51,7 @@ try:
     @app.route('/update-employee', methods=['GET','POST'])
     def update_by_id():
         newdata = request.form.to_dict()
-        sql = """UPDATE employees SET f_name = %s, l_name = %s, location_id = %s WHERE id = %s;"""
+        sql = """UPDATE employees SET f_name = %s, l_name = %s, locations = %s WHERE employees_id = %s;"""
         cur.execute(sql,(newdata["employeeFName"], newdata['employeeLName'], newdata['location'], newdata['ID']))
         con.commit()
         return redirect('http://localhost:3000')
