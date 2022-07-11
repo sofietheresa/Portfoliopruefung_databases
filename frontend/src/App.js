@@ -5,7 +5,7 @@ const App = () => {
   useEffect(() => {
     const getAPI = () => {
       //connect to local PostgreSQL Database
-      const API = "http://127.0.0.1:5000/";
+      const API = "http://localhost:5001/";
 
       fetch(API)
         .then((response) => {
@@ -31,7 +31,7 @@ const App = () => {
       {/* Form for adding employee */}
       <div className="form-container">
         <h2>Add Employee</h2>
-        <form method="POST" action="http://127.0.0.1:5000/add-employee">
+        <form method="POST" action="http://localhost:5001/add-employee">
           <div>
             <label>First Name</label>
             <input type="text" name="employeeFName" required />
@@ -53,7 +53,7 @@ const App = () => {
       {/* Form for deleting employee */}
       <div className="form-container">
         <h2>Delete Employee</h2>
-        <form method="POST" action="http://127.0.0.1:5000/delete-employee">
+        <form method="POST" action="http://localhost:5001/delete-employee">
           <div>
             <label>ID</label>
             <input type="number" name="ID" required />
@@ -69,7 +69,7 @@ const App = () => {
       {/* Form for updating employee */}
       <div className="form-container">
         <h2>Update Employee</h2>
-        <form method="POST" action="http://127.0.0.1:5000/update-employee">
+        <form method="POST" action="http://localhost:5001/update-employee">
           <div>
             <label>ID</label>
             <input type="number" name="ID" required />

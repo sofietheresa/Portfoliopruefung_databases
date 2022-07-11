@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - 5001:5001
+    links:
+      - db
+    command: python /usr/src/app/app.py run -h 0.0.0.0 -p 5001
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    links:
+      - backend
+  db:
+    image: postgres:14-alpine
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data/
+      - ./database_init:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres

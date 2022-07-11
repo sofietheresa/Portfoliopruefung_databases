@@ -9,16 +9,16 @@ app = flask.Flask(__name__)
 CORS(app, support_credentials=True, resources={r"/*": {"origins": "*"}})
 app.config["DEBUG"] = True
 
-try:
-    #connect to db
-    dbconn = {'database':"postgres",
-            'user': "postgres",
-            'host': "localhost",
-            'port': "5432",
-            'password': "1909"}
-    con = psycopg2.connect(**dbconn)
-    cur = con.cursor()
+#connect to db
+dbconn = {'database':"postgres",
+        'user': "postgres",
+        'host': "db",
+        'port': "5432",
+        'password': "postgres"}
+con = psycopg2.connect(**dbconn)
+cur = con.cursor()
 
+try:
    # READ: Fetch all employees from the database
     @app.route('/')
     def fetch_all_employees():
@@ -47,7 +47,7 @@ try:
         con.commit()
         return redirect('http://localhost:3000')
 
-    #UPDATED: Update employee by employeeId from the database
+    #UPDATE: Update employee by employeeId from the database
     @app.route('/update-employee', methods=['GET','POST'])
     def update_by_id():
         newdata = request.form.to_dict()
@@ -59,6 +59,5 @@ try:
 except:
     print('Error')
 
-
 if __name__ == '__main__':
-    app.run(host=os.getenv("app_host"), port="5000")
+    app.run(host="0.0.0.0", port="5001")
