@@ -1,5 +1,7 @@
 # Databases project - Library
 
+This is the project for the course Databases from the group 'Groupname'.
+
 Run the whole application stack:
 
 ```bash
