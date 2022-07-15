@@ -8,6 +8,8 @@ Run the whole application stack:
 docker-compose up -d --build
 ```
 
+(If your backend-docker-container doesn't run automatically please start it manual in your Docker Desktop.)
+
 To then access the frontend, head to `localhost:3000` in your browser.
 
 To reset the database, delete the `/data` folder and run the application stack again.
