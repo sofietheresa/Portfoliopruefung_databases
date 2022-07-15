@@ -1,4 +1,4 @@
-# databases 2 project
+# Databases project - Library
 
 Run the whole application stack:
 
