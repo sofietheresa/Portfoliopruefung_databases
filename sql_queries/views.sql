@@ -26,4 +26,9 @@ create materialized view Reader_with_addresses as
     reader_address.city 
    FROM readers 
      JOIN reader_address ON readers.readers_id = reader_address.reader_address_id; 
+
+create materialized view books_with_authors as
+	select med.media_id, med.title, aut.f_name, aut.l_name from media med
+		left join rel_media_author rel on med.media_id = rel.media
+		left join author aut on aut.author_id = rel.author
 	 
