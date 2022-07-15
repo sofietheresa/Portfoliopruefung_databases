@@ -56,8 +56,6 @@ CREATE TABLE loan(
 );
 
 CREATE TABLE dun(
-	dun_id serial UNIQUE NOT NULL,
-	primary key(dun_id),
 	loan integer,
 	foreign key (loan) references loan(loan_id),
 	first_dun date not null default current_date+8
