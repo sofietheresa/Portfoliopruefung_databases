@@ -15,4 +15,4 @@ To reset the database, delete the `/data` folder and run the application stack a
 # Organization
 - Our sql queries (create, insert, queries, views and trigger statements) can be found in [sql queries](/sql_queries)
 - Our video about the application can be found in [video](/video)
-- Our video about the application can be found in [documentation](/documentation)
+- Our documentation can be found in [documentation](/documentation)
